@@ -10,59 +10,63 @@ class Example(QWidget):
 
     def initUI(self):
         self.setGeometry(300, 300, 1000, 600)
-        self.setWindowTitle('Manikalkulator')
+        self.setWindowTitle('Дневник')
 
-        self.btn = QPushButton('Вычислить', self)
+        self.btn = QPushButton('Создать расписание дня', self)
         self.btn.resize(self.btn.sizeHint())
-        self.btn.move(100, 330)
-        self.btn.clicked.connect(self.summa)
+        self.btn.move(0, 330)
+        self.btn.clicked.connect(self.create_schedule)
+
+        self.name_label1 = QLabel(self)
+        self.name_label1.setText("Введите расписание дня вида урок1/урок2/урок3/.../урок8")
+        self.name_label1.move(0, 300)
+
+        self.name_label2 = QLabel(self)
+        self.name_label2.setText("Введите номер дня")
+        self.name_label2.move(0, 270)
+
+        self.name_input1 = QLineEdit(self)
+        self.name_input1.move(310, 300)
+
+        self.name_input2 = QLineEdit(self)
+        self.name_input2.move(105, 270)
 
         self.label1 = QLabel(self)
         self.label1.setText("Понедельник")
         self.label1.move(20, 20)
 
-        self.label2 = QLabel(self)
-        self.label2.setText("1 урок                           ")
-        self.label2.move(0, 50)
+        self.labels = []
 
-        self.label3 = QLabel(self)
-        self.label3.setText("2 урок")
-        self.label3.move(0, 70)
+        for i in range(10):
+            label = QLabel(self)
+            label.setText(str(i + 1) + " урок                                                ")
+            label.move(0, 50 + 20 * i)
+            self.labels.append(label)
 
-        self.label4 = QLabel(self)
-        self.label4.setText("3 урок")
-        self.label4.move(0, 90)
+        self.label1 = QLabel(self)
+        self.label1.setText("Вторник")
+        self.label1.move(220, 20)
 
-        self.label5 = QLabel(self)
-        self.label5.setText("4 урок")
-        self.label5.move(0, 110)
+        self.labels2 = []
 
-        self.label6 = QLabel(self)
-        self.label6.setText("5 урок")
-        self.label6.move(0, 130)
+        for i in range(10):
+            label = QLabel(self)
+            label.setText(str(i + 1) + " урок                                                ")
+            label.move(200, 50 + 20 * i)
+            self.labels2.append(label)
 
-        self.label7 = QLabel(self)
-        self.label7.setText("6 урок")
-        self.label7.move(0, 150)
+    def create_schedule(self):
+        lessons = self.name_input1.text()
+        mass = lessons.split('/')
+        if len(mass) > 10:
+            for i in range(10):
+                self.labels[i].setText("Слишком много уроков")
+        else:
+            for i in range(len(mass)):
+                self.labels[i].setText(str(i + 1) + " урок - {}".format(mass[i]))
+            for j in range(i + 1, 10):
+                self.labels[j].setText(str(j + 1) + " урок")
 
-        self.label8 = QLabel(self)
-        self.label8.setText("7 урок")
-        self.label8.move(0, 170)
-
-        self.label9 = QLabel(self)
-        self.label9.setText("8 урок")
-        self.label9.move(0, 190)
-
-        self.name_label1 = QLabel(self)
-        self.name_label1.setText("Введите 1 число:")
-        self.name_label1.move(0, 250)
-
-        self.name_input1 = QLineEdit(self)
-        self.name_input1.move(90, 250)
-
-    def summa(self):
-        number1 = self.name_input1.text()
-        self.label2.setText("1 урок - {}".format(number1))
 
 
 if __name__ == '__main__':
