@@ -9,7 +9,7 @@ class Example(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setGeometry(150, 300, 1200, 600)
+        self.setGeometry(150, 300, 1270, 500)
         self.setWindowTitle('Дневник')
 
         self.btn = QPushButton('Создать расписание дня', self)
@@ -18,7 +18,7 @@ class Example(QWidget):
         self.btn.clicked.connect(self.create_schedule)
 
         self.name_label1 = QLabel(self)
-        self.name_label1.setText("Введите расписание дня вида урок1/урок2/урок3/.../урок10")
+        self.name_label1.setText("Введите расписание дня вида: урок1/урок2/урок3/.../урок10")
         self.name_label1.move(0, 300)
 
         self.name_label2 = QLabel(self)
@@ -67,7 +67,7 @@ class Example(QWidget):
         self.name_input_text.move(500, 300)
 
         self.window_of_text = QLabel(self)
-        self.window_of_text.setText("Тут пока ничего нет                                                              ")
+        self.window_of_text.setText("В комментариях пока ничего нет                                                              ")
         self.window_of_text.move(500, 370)
 
     def create_schedule(self):
